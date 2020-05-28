@@ -10,6 +10,7 @@ string convert(string s, int numRows) {
     int len = s.length();
     int add = 0;
     string ret;
+
     for (int i = 0; i < numRows; ++i) {
         index = i;
         add = i * 2;
