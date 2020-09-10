@@ -1,29 +1,28 @@
 class Solution {
-public:
-vector<vector<int> > combinationSum(vector<int>& candidates, int target) {
-    vector<vector<int> > res;
-    vector<int> cur;
-
+ public:
+  vector<vector<int> > combinationSum(vector<int>& candidates, int target) {
     sort(candidates.rbegin(), candidates.rend());
-    coin(candidates, target, res, cur, 0);
+    coin(candidates, target, 0);
     return res;
-}
+  }
 
-
-void coin(vector<int>& candidates, int target, vector<vector<int> >& res, vector<int> cur, int idx) {
+ private:
+  vector<vector<int> > res;
+  vector<int> cur;
+  void coin(vector<int>& candidates, int target, int idx) {
     if (target == 0) {
-        res.push_back(cur);
-        return;
+      res.push_back(cur);
+      return;
     }
     if (idx == candidates.size() || target < 0) return;
     int candidate = candidates[idx];
 
-    for (int i = target / candidates[idx]; i > 0; --i) {
-        cur.push_back(candidates[idx]);
+    for (int i = target / candidate; i > 0; --i) {
+      cur.push_back(candidate);
     }
-    for (int j = target / candidates[idx]; j >= 0; --j) {
-        coin(candidates, target - candidates[idx] * j, res, cur, idx + 1);
-        if (j > 0) cur.pop_back();
+    for (int j = target / candidate; j >= 0; --j) {
+      coin(candidates, target - candidate * j, idx + 1);
+      if (j > 0) cur.pop_back();
     }
-}
+  }
 };
