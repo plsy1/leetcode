@@ -1,23 +1,24 @@
 class Solution {
-public:
-vector<vector<int> > permute(vector<int>& nums) {
-    vector<vector<int> > res;
-
-    f(nums, res, 0, nums.size() - 1);
+ public:
+  vector<vector<int>> permuteUnique(vector<int>& nums) {
+    this->nums = nums;
+    f(0, nums.size() - 1);
     return res;
-}
+  }
 
-void f(vector<int>& nums, vector<vector<int> >& res, int begin, int end) {
+ private:
+  vector<vector<int>> res;
+  vector<int> nums;
+
+  void f(int begin, int end) {
     if (begin == end) res.push_back(nums);
-
-    unordered_set<int> uniq;
-
+    unordered_set<int> s;
     for (int i = begin; i <= end; ++i) {
-        if (uniq.count(nums[i])) continue;
-        swap(nums[begin], nums[i]);
-        f(nums, res, begin + 1, end);
-        swap(nums[begin], nums[i]);
-        uniq.insert(nums[i]);
+      if (s.count(nums[i])) continue;
+      swap(nums[i], nums[begin]);
+      f(begin + 1, end);
+      swap(nums[i], nums[begin]);
+      s.insert(nums[i]);
     }
-}
+  }
 };
