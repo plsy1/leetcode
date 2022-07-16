@@ -1,1 +1,3 @@
-# 嗯写
+# Leetcode
+
+Codes of solves written by my self.
